@@ -1,0 +1,28 @@
+import React from 'react';
+<%if(ts){%>
+import { RouteConfig as BaseRouteConfig } from 'react-router-config';
+<%}%>
+import BasePage from '@/pages/Base';
+import Home from '@/pages/Home';
+<%if(ts){%>
+export interface RouteConfig extends BaseRouteConfig {
+  component?: React.ComponentType<any> | React.ComponentType;
+  routes?: RouteConfig[];
+}
+<%}%>
+const routes<%if(ts){%>:RouteConfig[]<%}%> = [
+  {
+    component: BasePage,
+    routes: [
+      {
+        path: '/',
+        exact: true,
+        component: Home,
+        title: 'Homepage',
+        routes: [],
+      }
+    ]
+  },
+];
+
+export default routes;

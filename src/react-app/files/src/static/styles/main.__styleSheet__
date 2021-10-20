@@ -1,0 +1,11 @@
+body {
+  background-color: #fff;
+  .postcss{
+    transform:rotate(7deg);
+    flex:1;
+  }
+  ul li{
+    display: inline-block;
+    padding:0 10px
+  }
+}

@@ -1,0 +1,50 @@
+module.exports = {
+	env: {
+		browser: true,
+		es2020: true,
+	},
+	<%if(ts){%>
+	parser: '@typescript-eslint/parser',
+	<%}else{%>
+	parser: '@babel/eslint-parser',
+	<%}%>
+	parserOptions: {
+		ecmaFeatures: {
+			jsx: true,
+		},
+		ecmaVersion: 2020,
+		sourceType: 'module',
+	},
+	extends: [
+		// 'eslint:recommended',
+		// 'plugin:react/recommended',
+		'airbnb', // The above two are already included, and react is not required in plugins
+		'plugin:prettier/recommended',
+	],
+	// plugins: ['react'],
+	<%if(ts){%>
+	plugins: ['@typescript-eslint'],
+	<%}%>
+	rules: {
+		'no-tabs': 'off',
+		'no-await-in-loop': 'error',
+		'no-template-curly-in-string': 'warn',
+		'require-await': 'error',
+		'generator-star-spacing': 'off',
+		'global-require': 'off',
+		'import/prefer-default-export': 'off',
+		'import/extensions': 'off',
+		'import/no-unresolved': 'off',
+		// 'import/newline-after-import': 'off',
+		'jsx-a11y/click-events-have-key-events': 'off',
+		'react/react-in-jsx-scope': 'off',
+		'react/forbid-prop-types': 'off',
+		'react/jsx-no-bind': 'off',
+		'react/prop-types': 'off',
+		'react/prefer-stateless-function': 'off',
+		'react/jsx-one-expression-per-line': 'off',
+		'react/button-has-type': 'off',
+		'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
+		'react/destructuring-assignment': ['error', 'never'],
+	},
+};

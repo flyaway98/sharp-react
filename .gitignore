@@ -1,0 +1,30 @@
+# dependencies
+node_modules
+npm-debug.log*
+yarn-error.log
+yarn.lock
+package-lock.json
+
+# testing
+/coverage
+
+# production
+/dist
+/build
+
+# misc
+.DS_Store
+.env.local
+
+# IDE
+.idea
+.vscode
+src/react-app/index_spec.d.ts
+src/react-app/index_spec.js
+src/react-app/index_spec.js.map
+src/react-app/index.d.ts
+src/react-app/index.js
+src/react-app/index.js.map
+src/react-app/schema.d.ts
+src/react-app/schema.js
+src/react-app/schema.js.map

@@ -1,0 +1,46 @@
+import React, { useEffect } from 'react';
+import axios from 'axios';
+<%if(antd){%>
+    import { Button } from 'antd';
+<%}%>
+import Icon from '@/components/Icon';
+<%if(useRedux){%>
+import Counter from './demo/hook';
+<%}%>
+
+<%if(cssModule){%>
+import styleObj from './Home.module.<%=styleSheet%>';
+<%}else{%>
+import './Home.<%=styleSheet%>';
+<%}%>
+
+function Home(){
+    useEffect(()=>{
+        const fetchData = async ()=>{
+            await axios.get('/api/getUser',{params:{id:1}});
+        }
+        fetchData();
+    },[]);
+    <%if(cssModule){%>
+    const classNameObj = styleObj.homeWrapper;
+    <%}else{%>
+    const classNameObj = 'homeWrapper';
+    <%}%>
+    return(
+            <div className={classNameObj}>
+                <h1>Home page</h1>
+                <div>
+                    <Icon name='demo1' />
+                </div>
+                <%if(useRedux){%>
+                <p>redux-toolkit demo：</p>
+                <Counter />
+                <%}%>
+                <%if(antd){%>
+                <Button type="primary">Button</Button>
+                <%}%>
+            </div>
+    )
+};
+
+export default Home;

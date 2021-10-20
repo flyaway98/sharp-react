@@ -1,0 +1,40 @@
+# <%=name%>
+
+## Installation
+
+First run the **git init** command, and then
+
+- npm:
+  ```bash
+  npm install
+  ```
+
+- yarn:
+  ```bash
+  yarn install
+  ```
+  
+## Usage
+
+```bash
+npm start  // start the server
+npm run mock // start the server and use the API proxy or mock data
+npm run build
+
+```
+
+
+## lint-staged not running on precommit?
+
+Check the output of git config core.hooksPath. This should not return anything. If this option is available, run the following command:
+
+```
+git config --unset core.hookspath
+```
+
+If the package manager is yarn2, try the following command:
+
+```
+npx husky add .husky/pre-commit "npx lint-staged"
+git commit -m "added husky and lint-stagged"
+```

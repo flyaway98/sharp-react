@@ -1,0 +1,143 @@
+{
+  "name": "<%=name%>",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node scripts/start",
+    "mock": " npm run start -- mock",
+    "build": "node scripts/build",
+    "preview": "node scripts/preview",
+    "prepare": "husky install && npx husky add .husky/pre-commit 'npx lint-staged'",
+    "pre-commit": "lint-staged"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/eslint-parser": "^7.15.8",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-react-constant-elements": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.12.5",
+    <%if(ts){%>
+    "@babel/preset-typescript": "^7.15.0",  
+    "@types/react": "^16.13.1",
+    "@types/react-dom": "^16.9.14",
+      <%if(useRedux){%>
+    "@types/react-redux": "^7.1.18",
+      <%}%>
+      <%if(useRouter){%>
+    "@types/react-router-config": "5.0.2",
+    "@types/react-router-dom": "5.1.8",
+      <%}%>
+    "@types/webpack-env": "^1.16.2",
+    "@typescript-eslint/eslint-plugin": "4.0.1",
+    "@typescript-eslint/parser": "4.0.1",
+    <%}%>
+    "autoprefixer": "^9.4.9",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-imports": "^2.0.0",
+    "body-parser": "^1.19.0",
+    "chalk": "^4.1.0",
+    "chokidar": "^3.5.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^9.0.0",
+    "core-js": "^3.6.5",
+    "css-loader": "5.2.7",
+    "css-hot-loader": "^1.4.4",
+    "cssnano": "^4.1.10",
+    "css-minimizer-webpack-plugin": "^3.0.2",
+    "express": "^4.16.4",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "file-loader": "^6.2.0",
+    "fs-extra": "^9.0.1",
+    "glob": "^7.1.6",
+    "happypack": "5.0.1",
+    "html-webpack-plugin": "^5.3.1",
+    "http-proxy-middleware": "^2.0.0",
+    "husky": "7.0.2",
+    "lint-staged": "11.2.3",
+    <%if(styleSheet === 'less'){%>
+    "less": "^4.1.1",
+    "less-loader": "^10.0.1",
+    <%} else if(styleSheet === 'scss'){%>
+    "resolve-url-loader": "^4.0.0",
+    "sass": "~1.32.13",
+    "sass-loader": "^11.1.1",
+    <%}%>
+    "mini-css-extract-plugin": "^1.6.2",
+    "mockjs": "^1.1.0",
+    "postcss-flexbugs-fixes": "^4.1.0",
+    "postcss-loader": "^5.3.0",
+    "postcss": "^8.3.8",
+    "prettier": "^2.0.0",
+    "query-string": "^7.0.1",
+    "react-dev-utils": "^11.0.1",
+    "react-hot-loader": "^4.13.0",
+    "style-loader": "^2.0.0",
+    "svg-sprite-loader": "^6.0.6",
+    <%if(ts){%>
+    "typescript": "^4.3.5",
+    <%}%>
+    "url": "^0.11.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.37.1",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-chain": "6.5.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-middleware": "^4.3.0",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpackbar": "^5.0.0-3"
+
+  },
+  "dependencies": {
+    "axios": "^0.21.4",
+    <%if(antd){%>
+    "antd": "4.16.3",
+    <%}%>
+    <%if(useRedux){%>
+    "@reduxjs/toolkit": "^1.4.0",
+    "redux": "^4.1.1",
+    "react-redux": "^7.2.4",
+    <%}%>
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
+    <%if(useRouter){%>
+    "react-router": "^5.2.1",
+    "react-router-config": "5.1.1",
+    "react-router-dom": "^5.2.0",
+    <%}%>
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "sideEffects": [
+    "*.css",
+    "*.scss",
+    "*.sass",
+    "*.less"
+  ],
+  "lint-staged": {
+    "src/**/*.{js,jsx<%if(ts){%>,ts,tsx<%}%>}": [
+      "prettier --write",
+      "eslint"
+    ]
+  }
+}

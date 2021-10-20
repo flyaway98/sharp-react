@@ -1,0 +1,137 @@
+/* eslint-disable import/no-extraneous-dependencies */
+const path = require('path');
+const os = require('os');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
+const HappyPack = require('happypack');
+
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+const Config = require('webpack-chain');
+
+const baseConfig = new Config();
+baseConfig.mode('production');
+// 入口
+baseConfig.entry('main').add(path.resolve(__dirname, '../src/main.<%=ts?'tsx':'jsx'%>'));
+// 输出路径
+baseConfig.output
+    .path(path.resolve(__dirname, '../dist'))
+    .filename('js/[name].js');
+// 文件查找
+baseConfig.resolve.merge({
+        fallback:{
+            url: require.resolve('url')
+        }
+    })
+    .extensions.merge(['.js', '.jsx', '.ts','.tsx','.json', '.less', '.scss','.css']).end()
+    .alias
+    .set('@', path.resolve(__dirname, '../src/'))
+// 模块解析-css
+baseConfig.module.rule('css')
+    .test(/\.(css|less|scss)$/)
+    .use('exactCss-loader')
+    .loader(MiniCssExtractPlugin.loader)
+    .end()
+
+    .use('css-loader')
+    .loader('css-loader')
+    .options({ 
+        modules:{
+            auto: /\.module\.(less|scss|css)$/i
+        }
+    })
+    .end()
+
+    .use('postcss-loader')
+    .loader('postcss-loader')
+    .options({
+        postcssOptions:{
+           plugins:[
+               ["autoprefixer"],
+               ["postcss-flexbugs-fixes"]
+           ]
+        }
+    })
+    .end()
+    <%if(styleSheet === 'less'){%>
+    .use('less-loader')
+    .loader('less-loader')
+    <%} else if(styleSheet === 'scss'){%>
+        .use("scss-resolve")
+        .loader("resolve-url-loader")
+        .end()
+    
+        .use("scss-loader")
+        .loader("sass-loader")
+        .options({
+            sourceMap: true
+        })
+    <%}%>
+    .end();
+// 模块解析-js
+baseConfig.module.rule('js')
+    .test(/\.(js|jsx|ts|tsx)$/)
+    .exclude.add(/(node_modules)|(unbabel)/).end()
+    .use('happypack')
+    .loader('happypack/loader?id=happybabel');
+// 模块解析-图片
+baseConfig.module.rule('img')
+    .test(/\.(png|jpg|jpeg|gif|svg|ico)$/)
+    .exclude.add(path.resolve(__dirname, '../src/static/icon')).end()
+    .use('url-loader')
+    .loader('url-loader')
+    .options({
+        limit: 8192,
+        name: 'img/[folder]/[name].[ext]'
+    });
+// 模块解析-svg图表
+baseConfig.module.rule('svg-icon')
+    .test(/\.svg$/)
+    .include.add(path.resolve(__dirname, '../src/static/icon')).end()
+    .use('svg-sprite-loader')
+    .loader('svg-sprite-loader')
+    .options({
+        symbolId: 'icon-[name]'
+    });
+baseConfig.module.rule('font-icon')
+    .test(/\.(ttf|eot|woff)$/)
+    .use('url-loader')
+    .loader('url-loader')
+    .options({
+        limit: 8192,
+        name: 'font/[name].[ext]'
+    });
+// 清空构建文件夹
+baseConfig
+    .plugin('clean')
+    .use(CleanWebpackPlugin, [{
+        verbose: true
+    }])
+    .end();
+baseConfig
+    .plugin('happyPack')
+    .use(HappyPack, [{
+        id: 'happybabel',
+        loaders: ['babel-loader?cacheDirectory=true'],
+        threadPool: happyThreadPool,
+        verbose: true
+    }])
+    .end()
+
+    .plugin('exactCss')
+    .use(MiniCssExtractPlugin, [{
+        filename: 'style/[name].css'
+    }])
+    .end()
+
+    .plugin('html')
+    .use(HtmlPlugin, [{
+        template: 'src/index.ejs',
+        filename: 'index.html',
+        chunks: ['libs', 'common', 'main'],
+        // Inject template variables
+        templateParameters: {
+            title: 'webpack-react'
+        }
+    }]);
+module.exports = baseConfig;

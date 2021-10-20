@@ -1,0 +1,11 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "react-app": {
+      "aliases": ["app"],
+      "description": "react a",
+      "factory": "./react-app/index#react",
+      "schema": "./react-app/schema.json"
+    }
+  }
+}

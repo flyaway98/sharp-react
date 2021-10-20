@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$id": "SchematicsReactApp",
+    "title": "React App Factory",
+    "type": "object",
+    "description": "create react app by Schematics",
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "default": "reactapp",
+        "x-prompt": "Enter an app name"
+      },
+      "subfolder":{
+        "type": "boolean",
+        "default": false,
+        "x-prompt": "Create an application in a subdirectory of the current directory"
+      },
+      "styleSheet": {
+          "type": "string",
+          "default": "less",
+          "enum": [
+            "less",
+            "scss"
+          ],
+          "x-prompt": "Select which style language to use"
+      },
+      "cssModule":{
+        "type": "boolean",
+        "default": false,
+        "x-prompt": "Use cssmoudle"
+      },
+      "ts": {
+        "type": "boolean",
+        "default": false,
+        "x-prompt": "Use typescript"
+      },
+      "useRedux": {
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Use redux",
+        "description": "If the Redux is used, the Redux toolkit is integrated"
+      },
+      "useRouter": {
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Use router"
+      },
+      "antd": {
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Use antd ui lib"
+      }
+    },
+    "required": []
+  }
+  

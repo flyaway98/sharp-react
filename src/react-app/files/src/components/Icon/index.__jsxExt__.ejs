@@ -1,0 +1,50 @@
+import React from 'react';
+<%if(!ts){%>
+import PropTypes from 'prop-types';
+<%}%>
+import classnames from 'classnames';
+
+<%if(cssModule){%>
+import styleObj from './index.module.<%=styleSheet%>';
+<%}else{%>
+import './index.<%=styleSheet%>';
+<%}%>
+
+<%if(ts){%>
+interface IconProps {
+  name: string;
+  className?: string;
+}
+<%}%>
+/**
+ * svg Component
+ * @description:
+ * Svg images must be decolored or use currentcolor
+*/
+export default function Icon(props<%=ts?':IconProps':''%>) {
+    <%if(cssModule){%>
+    const baseClassName = styleObj.comIcon;
+    <%}else{%>
+    const baseClassName = 'comIcon';
+    <%}%>
+    return (
+        <svg className={classnames(baseClassName, { [props.className]: !!props.className })} aria-hidden='true'>
+            <use xlinkHref={`#icon-${props.name}`} />
+        </svg>
+    );
+}
+<%if(!ts){%>
+Icon.propTypes = {
+    /** svg文件名  */
+    name: PropTypes.string.isRequired,
+    /** 图标样式 */
+    className: PropTypes.string
+};
+Icon.defaultProps = {
+    className: ''
+};
+<%}else {%>
+Icon.defaultProps = {
+    className: ''
+} as Partial<IconProps>;
+<%}%>

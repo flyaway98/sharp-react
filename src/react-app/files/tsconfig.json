@@ -1,0 +1,38 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "outDir": "./dist/",
+      "paths": {
+        "@/*": ["./src/*"]
+      },
+      "module": "esnext",
+      "target": "esnext",
+      "lib": ["esnext", "dom"],
+      "sourceMap": true,
+      "jsx": "react",
+      "allowSyntheticDefaultImports": true,
+      /* 从 .js 文件处理和推断类型 */
+      "allowJs": true,
+      "esModuleInterop": true,
+      /* 模块解析策略 */
+      "moduleResolution": "node",
+      "forceConsistentCasingInFileNames": true,
+      /* 当某个函数里的代码可能有返回值也可能没有时，抛出错误 */
+      "noImplicitReturns": true,
+      /*在表达式和声明上有隐含的 any类型时报错*/
+      "noImplicitAny": false,
+      /*不生成输出文件，由babel处理 */
+      "noEmit": true,
+      "suppressImplicitAnyIndexErrors": true,
+      "noUnusedLocals": true,
+      "skipLibCheck": true,
+      "experimentalDecorators": true,
+      "strict": true,
+      "types": [
+        "node",
+        "webpack-env" // here
+      ]
+    },
+    "include": ["./src"]
+}
+  

@@ -1,0 +1,37 @@
+import React from 'react'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
+import { decrement, increment } from './model'
+
+function Counter(props) {
+  return (
+    <div>
+      <div>
+        <button
+          aria-label="Increment value"
+          onClick={props.increment}
+        >
+          Increment
+        </button>
+        <span>{props.counterValue}</span>
+        <button
+          aria-label="Decrement value"
+          onClick={props.decrement}
+        >
+          Decrement
+        </button>
+      </div>
+    </div>
+  )
+}
+
+const mapStateToProps = ({ counter }) => ({
+    counterValue: counter.value
+});
+const mapDispatchToProps = dispatch => ({
+    ...bindActionCreators({
+        increment,
+        decrement
+    }, dispatch)
+});
+export default connect(mapStateToProps,mapDispatchToProps)(Counter);

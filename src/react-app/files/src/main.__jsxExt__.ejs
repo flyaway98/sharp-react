@@ -1,0 +1,47 @@
+import React from 'react';
+import ReactDom from 'react-dom';
+<%if(useRouter){%>
+import { BrowserRouter } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
+<%}%>
+<%if(useRedux){%>
+import { Provider } from 'react-redux';
+import store from './models';
+<%}%>
+import '@/static/styles/main.<%= styleSheet%>';
+import loadAllFile from '@/utils/loadAllFiles';
+<%if(useRouter){%>
+import routes from './routes';
+<%}else{%>
+import Home from '@/pages/Home';
+<%}%>
+
+<%if(antd){%>
+import 'antd/dist/antd.css';;
+<%}%>
+
+const icons = require.context('@/static/icon', false, /\.svg$/);
+loadAllFile(icons);
+
+<%if(useRouter){%>
+const rootComponent = (
+    <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
+);
+<%}else{%>
+const rootComponent =  <Home />
+<%}%>
+
+ReactDom.render(
+    <%if(useRedux){%>
+    <Provider store={store}>
+        {rootComponent}
+    </Provider>
+    , 
+    <%} else {%>
+    rootComponent,
+    <%}%>
+    document.getElementById('app')
+);
+if (module.hot) {
+    module.hot.accept();
+}
