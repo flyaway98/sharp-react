@@ -4,6 +4,8 @@
 
 Generate a variety of react applications through schematic.
 
+The project does not do much abstraction. Junior engineers can learn the configuration knowledge related to webpack and Babel; Experienced engineers can establish their own engineering construction scheme based on this;
+
 
 ## Features
 - Reusable webpack chain configuration and Babel configuration based on best practices
@@ -17,7 +19,7 @@ Generate a variety of react applications through schematic.
 - Preview server for built files
 - Only polyfill the used api
 - Lint and format the code in the pre-commit phase
-
+- [Chinese docs](./readme.zh-CN.md) 
 ## Installation
 - npm:
   ```bash
