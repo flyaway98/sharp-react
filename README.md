@@ -1,6 +1,5 @@
 # sharp-react
 [![npm version](https://badge.fury.io/js/sharp-react.svg)](https://badge.fury.io/js/sharp-react)
-[![npm](https://img.shields.io/npm/dt/sharp-react.svg)](https://github.com/flyaway98/sharp-react)
 
 Generate a variety of react applications through schematic.
 

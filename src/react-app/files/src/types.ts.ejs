@@ -1,0 +1,28 @@
+import React from 'react';
+<%if(useRouter){%>
+import { RouteConfig as BaseRouteConfig } from 'react-router-config';
+import { RouteComponentProps } from 'react-router-dom';
+<%}%>
+/**
+ *  ajax response common
+ */
+export type AjaxResponse<T> = Promise<{
+	status: number;
+	result: T | null;
+	errMsg: string;
+}>;
+<%if(useRouter){%>
+/**
+ * RouteConfig
+ */
+export interface RouteConfig extends BaseRouteConfig {
+	component?: React.ComponentType<any> | React.ComponentType;
+	routes?: RouteConfig[];
+}
+/**
+ * RoutePage common props
+ */
+export interface RoutePageProps extends RouteComponentProps {
+	route?: RouteConfig;
+}
+<%}%>

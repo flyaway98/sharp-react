@@ -22,7 +22,7 @@ module.exports = {
         <%if(antd){%>
         ["transform-imports", {
             "antd": {
-                "transform": 'antd/lib/${member}',
+                "transform": (importName) => `antd/lib/${importName.toLowerCase()}`,
                 "preventFullImport": true
             },
         }]

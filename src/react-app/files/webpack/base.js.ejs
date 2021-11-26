@@ -15,6 +15,7 @@ baseConfig.mode('production');
 baseConfig.entry('main').add(path.resolve(__dirname, '../src/main.<%=ts?'tsx':'jsx'%>'));
 // 输出路径
 baseConfig.output
+    .publicPath('/')
     .path(path.resolve(__dirname, '../dist'))
     .filename('js/[name].js');
 // 文件查找

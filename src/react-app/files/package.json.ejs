@@ -5,7 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "node scripts/start",
-    "mock": " npm run start -- mock",
+    "mock": "node scripts/start --mock",
     "build": "node scripts/build",
     "preview": "node scripts/preview",
     "prepare": "husky install && npx husky add .husky/pre-commit 'npx lint-staged'",
@@ -39,6 +39,7 @@
     "@typescript-eslint/eslint-plugin": "4.0.1",
     "@typescript-eslint/parser": "4.0.1",
     <%}%>
+    "argvs": "^1.2.0",
     "autoprefixer": "^9.4.9",
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-imports": "^2.0.0",

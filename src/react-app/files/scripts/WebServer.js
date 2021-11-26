@@ -10,7 +10,7 @@ const openBrowser = require('react-dev-utils/openBrowser');
 const chalk = require('chalk');
 const bodyParser = require('body-parser');
 const querystring = require('query-string');
-
+const { argv } = require('argvs');
 class CreateServer {
     constructor(config = {}) {
         const defaultConfig = {
@@ -33,7 +33,6 @@ class CreateServer {
             this._createMock();
         });
         this.config = { ...defaultConfig, ...config };
-        this._createMock();
         this._init();
         this.started = false;
     }
@@ -41,6 +40,8 @@ class CreateServer {
         const app = express();
         app.use(bodyParser.json());
         this.server = app;
+        this._createMock();
+        this._registerProxy();
     }
     _createMock(){
         const files = glob.sync(path.join(this.mockFolder,'**/*.js'));
@@ -57,12 +58,11 @@ class CreateServer {
         }
     }
     _registerProxy() {
-        const injectLocalMock = process.argv.indexOf('mock') > -1;
         const onProxyReq = (proxyReq, req, res) => {
             const {
                 path: apiPath, query, method
             } = req;
-            if (injectLocalMock) {
+            if (argv.mock) {
                 const mockObj = this.mockDataRule[apiPath.toLowerCase()];
                 let mockData = null;
                 if (mockObj) {
@@ -138,7 +138,6 @@ class CreateServer {
 
     start(isMemeryFileSystem = false) {
         const { hostname, port: defaultPort, openPage } = this.config;
-        this._registerProxy();
         if (!isMemeryFileSystem) this._setStaticFile();
         choosePort(hostname, defaultPort).then(newPort => {
             const host = `http://${hostname}:${newPort}`;
