@@ -1,6 +1,6 @@
 {
-  "name": "sharp-react",
-  "version": "0.0.1",
+  "name": "@3mcode/sharp-react",
+  "version": "0.0.2",
   "description": "create react app by schematics",
   "scripts": {
     "build": "rimraf dist && tsc && node ./script/copy",

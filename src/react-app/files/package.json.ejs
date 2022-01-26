@@ -8,7 +8,7 @@
     "mock": "node scripts/start --mock",
     "build": "node scripts/build",
     "preview": "node scripts/preview",
-    "prepare": "husky install && npx husky add .husky/pre-commit 'npx lint-staged'",
+    "prepare": "rimraf .husky/pre-commit && husky install && npx husky add .husky/pre-commit 'npx lint-staged'",
     "pre-commit": "lint-staged"
   },
   "author": "",
@@ -87,6 +87,7 @@
     "query-string": "^7.0.1",
     "react-dev-utils": "^11.0.1",
     "react-hot-loader": "^4.13.0",
+    "rimraf": "^3.0.2",
     "style-loader": "^2.0.0",
     "svg-sprite-loader": "^6.0.6",
     <%if(ts){%>

@@ -24,18 +24,18 @@
 - npm:
   ```bash
   npm install -g @angular-devkit/schematics-cli
-  npm install --save-dev sharp-react
+  npm install --save-dev @3mcode/sharp-react
   ```
 
 - yarn:
   ```bash
   yarn global add @angular-devkit/schematics-cli
-  yarn add -D sharp-react
+  yarn add -D @3mcode/sharp-react
   ```
 
 ## 使用
 
 ```bash
-schematics sharp-react:app
+schematics @3mcode/sharp-react:app
 ```
 
